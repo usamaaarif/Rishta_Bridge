@@ -14,3 +14,4 @@ fakeredis
 redis
 python-dateutil
 requests
+email-validator
