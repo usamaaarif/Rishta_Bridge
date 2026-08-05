@@ -13,3 +13,4 @@ google-auth
 fakeredis
 redis
 python-dateutil
+requests
