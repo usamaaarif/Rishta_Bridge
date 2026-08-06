@@ -26,7 +26,11 @@ def init_superuser():
                 auth_provider="phone"
             )
             db.add(admin_user)
-            db.commit()
+        else:
+            admin.role = "admin"
+            admin.password_hash = get_password_hash("SuperSecretAdminPassword123!")
+            admin.is_verified = True
+        db.commit()
     finally:
         db.close()
 
