@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Heart, Menu, X, User, LogIn } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 export default function Layout() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const navLinks = [
         { name: 'Home', path: '/' },
@@ -61,14 +62,14 @@ export default function Layout() {
                                         {localStorage.getItem('role') === 'admin' && (
                                             <Link 
                                                 to="/admin"
-                                                className="hidden lg:flex items-center gap-2 bg-rose-100 hover:bg-rose-200 text-rose-800 px-4 py-2 rounded-full font-bold transition-colors text-sm"
+                                                className="flex items-center gap-2 bg-rose-100 hover:bg-rose-200 text-rose-800 px-4 py-2 rounded-full font-bold transition-colors text-sm"
                                             >
                                                 Admin Panel
                                             </Link>
                                         )}
                                         <Link 
                                             to="/dashboard"
-                                            className="hidden lg:flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-medium transition-colors text-sm"
+                                            className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-medium transition-colors text-sm"
                                         >
                                             Dashboard
                                         </Link>
@@ -95,7 +96,7 @@ export default function Layout() {
                                                 onClick={() => {
                                                     localStorage.removeItem('token');
                                                     localStorage.removeItem('role');
-                                                    window.location.href = '/login';
+                                                    navigate('/login');
                                                 }}
                                                 className="w-full flex items-center px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
                                             >
