@@ -11,6 +11,26 @@ import os
 # Create tables based on new models
 Base.metadata.create_all(bind=engine)
 
+def init_superuser():
+    from database import SessionLocal
+    from routers.auth import get_password_hash
+    db = SessionLocal()
+    try:
+        admin = db.query(models.User).filter(models.User.phone_number == "+920000000000").first()
+        if not admin:
+            admin_user = models.User(
+                phone_number="+920000000000",
+                password_hash=get_password_hash("SuperSecretAdminPassword123!"),
+                role="admin",
+                is_verified=True,
+                auth_provider="phone"
+            )
+            db.add(admin_user)
+            db.commit()
+    finally:
+        db.close()
+
+init_superuser()
 app = FastAPI(title="Rishta App API - V2", description="Backend for Pakistani Matrimonial Service")
 
 # CORS
