@@ -6,6 +6,7 @@ import api from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 import * as C from '../lib/constants';
 import * as LD from '../lib/locationData';
+import { getImageUrl } from '../lib/utils';
 
 export default function Search() {
     const navigate = useNavigate();
@@ -214,7 +215,7 @@ export default function Search() {
                                 <div className="relative h-64 bg-slate-200">
                                     {profile.image_url ? (
                                         <img
-                                            src={`http://localhost:8000${profile.image_url}`}
+                                            src={getImageUrl(profile.image_url)}
                                             alt={profile.name}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                         />

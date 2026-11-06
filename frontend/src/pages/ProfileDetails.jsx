@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../lib/api';
 import { Loader2, ArrowLeft, MapPin, Ruler, BookOpen, Briefcase, Heart, User, Users } from 'lucide-react';
 import { Button } from '../components/ui';
+import { getImageUrl } from '../lib/utils';
 
 export default function ProfileDetails() {
     const { id } = useParams();
@@ -66,7 +67,7 @@ export default function ProfileDetails() {
                             <div className="-mt-20 flex-shrink-0">
                                 <div className="w-40 h-40 rounded-full border-4 border-white shadow-lg bg-slate-200 overflow-hidden">
                                     {profile.image_url ? (
-                                        <img src={`http://localhost:8000${profile.image_url}`} alt={profile.name} className="w-full h-full object-cover" />
+                                        <img src={getImageUrl(profile.image_url)} alt={profile.name} className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-6xl bg-slate-100">
                                             {profile.gender === 'Female' ? '👩' : '👨'}

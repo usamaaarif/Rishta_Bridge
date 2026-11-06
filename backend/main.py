@@ -38,14 +38,22 @@ init_superuser()
 app = FastAPI(title="Rishta App API - V2", description="Backend for Pakistani Matrimonial Service")
 
 # CORS
-origins = [
-    "http://localhost:5173", # Vite default
-    "http://localhost:3000",
-]
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+if allowed_origins_env:
+    origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
+else:
+    origins = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://shadi.org.uk",
+        "https://www.shadi.org.uk",
+        "http://shadi.org.uk",
+        "http://www.shadi.org.uk",
+    ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins if allowed_origins_env else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

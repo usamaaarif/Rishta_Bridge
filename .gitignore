@@ -16,7 +16,7 @@ backend/rishta_app.db
 
 # Frontend
 frontend/node_modules/
-frontend/dist/
+# frontend/dist/ (tracked for Plesk deployment)
 frontend/.npm/
 
 # IDEs and Editors

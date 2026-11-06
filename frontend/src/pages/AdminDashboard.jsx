@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../lib/api';
 import { Button, Input } from '../components/ui';
+import { getImageUrl } from '../lib/utils';
 import { ShieldAlert, Check, X, Image as ImageIcon, Users, KeyRound, Search, FileText } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -211,7 +212,7 @@ export default function AdminDashboard() {
                                         <div key={cnic.id} className="border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow bg-slate-50">
                                             <div className="aspect-video bg-slate-200 relative">
                                                 <img 
-                                                    src={cnic.metadata_json?.startsWith('http') ? cnic.metadata_json : `http://localhost:8000${cnic.metadata_json}`} 
+                                                    src={getImageUrl(cnic.metadata_json)} 
                                                     alt="Pending CNIC" 
                                                     className="w-full h-full object-cover"
                                                 />
@@ -262,7 +263,7 @@ export default function AdminDashboard() {
                                         <div key={photo.id} className="border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow bg-slate-50">
                                             <div className="aspect-square bg-slate-200 relative">
                                                 <img 
-                                                    src={photo.file_path.startsWith('http') ? photo.file_path : `http://localhost:8000${photo.file_path}`} 
+                                                    src={getImageUrl(photo.file_path)} 
                                                     alt="Pending Photo" 
                                                     className="w-full h-full object-cover"
                                                 />

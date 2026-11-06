@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from './ui';
 import api from '../lib/api';
+import { getImageUrl } from '../lib/utils';
 import { Loader2, Upload, Image as ImageIcon } from 'lucide-react';
 
 export default function ImageUpload({ onUpload, initialImage }) {
@@ -35,7 +36,7 @@ export default function ImageUpload({ onUpload, initialImage }) {
                 <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
                     {/* Prepend base URL if it's a relative path */}
                     <img
-                        src={(preview || '').startsWith('http') ? preview : `http://localhost:8000${preview}`}
+                        src={getImageUrl(preview)}
                         alt="Profile"
                         className="w-full h-full object-cover"
                     />

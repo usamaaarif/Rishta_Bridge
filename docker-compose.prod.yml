@@ -29,11 +29,15 @@ services:
       dockerfile: Dockerfile
     container_name: rishtabridge-backend-prod
     restart: always
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-rishtabridge}
       - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-change_this_to_a_secure_random_key}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-https://shadi.org.uk,https://www.shadi.org.uk}
+    volumes:
+      - uploads_prod:/app/uploads
     depends_on:
       - db
       - redis
@@ -46,9 +50,11 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - backend
 
 volumes:
   pgdata_prod:
   redisdata_prod:
+  uploads_prod:

@@ -4,6 +4,7 @@ import api from '../lib/api';
 import { useNavigate, Link } from 'react-router-dom';
 import { User, Plus, Edit, KeyRound, ShieldCheck, X, FileBadge, Upload } from 'lucide-react';
 import { Input } from '../components/ui';
+import { getImageUrl } from '../lib/utils';
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -157,7 +158,7 @@ export default function Dashboard() {
                                     <div className="flex items-start justify-between mb-4">
                                         <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden">
                                             {profile.image_url ? (
-                                                <img src={profile.image_url.startsWith('http') ? profile.image_url : `http://localhost:8000${profile.image_url}`} alt={profile.name} className="w-full h-full object-cover" />
+                                                <img src={getImageUrl(profile.image_url)} alt={profile.name} className="w-full h-full object-cover" />
                                             ) : (
                                                 <div className="w-full h-full flex items-center justify-center text-slate-400"><User className="w-6 h-6" /></div>
                                             )}
